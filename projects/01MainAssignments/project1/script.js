@@ -58,14 +58,14 @@ function setupMoodSelection() {
 
   // Angry Button
   let angryButton = createButton('Angry');
-  angryButton.position(width / 2 - 60, buttonY); // Neben Happy
+  angryButton.position(width / 2 - 60, buttonY); 
   styleButton(angryButton, '#D91656', buttonWidth, buttonHeight);
   angryButton.mousePressed(() => selectMood('Angry'));
   buttons.push(angryButton);
 
   // Sad Button
   let sadButton = createButton('Scared');
-  sadButton.position(width / 2 + 80, buttonY); // Neben Angry
+  sadButton.position(width / 2 + 80, buttonY); 
   styleButton(sadButton, '#80C4E9', buttonWidth, buttonHeight);
   sadButton.mousePressed(() => selectMood('Sad'));
   buttons.push(sadButton);
@@ -115,13 +115,13 @@ function selectMood(mood) {
   } else if (mood === 'Sad') {
 		textFont(sadFont);
     backgroundColor = '#808080'; 
-    textColor = color(128, 196, 233); // Blau
+    textColor = color(128, 196, 233); 
   }
 }
 
 
 function drawTypingPage() {
-  background(backgroundColor); // Verwende die eingestellte Hintergrundfarbe
+  background(backgroundColor); 
 
   let textWidthValue = calculateTextWidth(editableString);
   let maxTextWidth = width - 40;
@@ -174,7 +174,7 @@ function mousePressed() {
 
 function formWord() {
   let maxLettersPerLine = 25; 
-  let spacing = 50; // Einheitlicher Abstand zwischen Buchstaben
+  let spacing = 50; 
   let lineHeight = defaultTextSize * 1.5; 
   let numLines = ceil(letters.length / maxLettersPerLine); 
 
@@ -221,17 +221,17 @@ function calculateTextWidth(str) {
 
 function setMoodStyle(mood) {
   if (mood === 'Happy') {
-    defaultTextSize = 64; // Größer für Happy
+    defaultTextSize = 64; 
     textFont(font);
     fill(255, 204, 0);
     textStyle(BOLD);
   } else if (mood === 'Sad') {
-    defaultTextSize = 48; // Etwas kleiner für Sad
+    defaultTextSize = 48; 
     textFont(font);
     fill(0, 0, 255);
     textStyle(ITALIC);
   } else if (mood === 'Angry') {
-    defaultTextSize = 72; // Sehr groß für Angry
+    defaultTextSize = 72; 
     textFont(angryFont);
     fill(255, 0, 0);
     textStyle(BOLD);

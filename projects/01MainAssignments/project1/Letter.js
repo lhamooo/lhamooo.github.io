@@ -10,16 +10,16 @@ class Letter {
       this.targetX = null;
       this.targetY = null;
   
-      this.color = color(random(50, 200), random(50, 200), random(50, 200)); // Farbe für Happy
+      this.color = color(random(50, 200), random(50, 200), random(50, 200)); 
   
       this.exploded = false;
       this.initialSize = 44;
       this.currentSize = this.initialSize * 2; 
       this.sizeGrowSpeed = 0.2; 
       this.sizeShrinkSpeed = 0.3; 
-      this.scaredOffset = createVector(0, 0); // Offset für Scared-Reaktion
+      this.scaredOffset = createVector(0, 0); 
   
-      this.visible = true; // Sichtbarkeit des Buchstabens
+      this.visible = true;
       this.isHovered = false; 
     }
   
@@ -71,9 +71,8 @@ class Letter {
   
       this.isHovered = distance < 70;
   
-      // Scared-Reaktion
       if (currentMood === 'Sad') {
-        this.visible = !this.isHovered; // Buchstabe verschwindet, wenn Maus darüber
+        this.visible = !this.isHovered; 
       }
     }
   
@@ -82,40 +81,35 @@ class Letter {
   
       let waveMovementY = 0;
       let waveMovementX = 0;
-      let rotationAngle = 0; // Für Drehung im Happy-Modus
-      let fontSizeMultiplier = 1; // Keine Größenänderung im Happy-Modus
+      let rotationAngle = 0; 
+      let fontSizeMultiplier = 1; 
   
       if (currentMood === 'Happy') {
-        // Happy-Verhalten
         fill(this.color);
-        let waveAmplitude = this.isHovered ? 40 : 15; // Viel stärkere Schwingung bei Hover
+        let waveAmplitude = this.isHovered ? 40 : 15; 
         waveMovementY = sin(TWO_PI * (frameCount + index * 10) / 100) * waveAmplitude;
         waveMovementX = cos(TWO_PI * (frameCount + index * 10) / 120) * waveAmplitude * 0.5;
   
         if (this.isHovered) {
-          // Hüpfen oder verstärkte Bewegungen nach oben/unten
           waveMovementY += sin(frameCount * 0.05) * 20;
           waveMovementX += cos(frameCount * 0.05) * 10;
   
-          // Kleine Drehung für eine verspielte Note
           rotationAngle = sin(frameCount * 0.1) * PI / 16;
         }
       } else if (currentMood === 'Angry') {
-        // Angry-Verhalten bleibt grün
-        fill(color(random(0, 50), random(150, 255), random(0, 50))); // Pulsierend grün
+        fill(color(random(0, 50), random(150, 255), random(0, 50))); 
         waveMovementY = (sin(frameCount * 0.4) * 8 + cos(frameCount * 0.5) * 8) * (this.isHovered ? 2 : 1);
         waveMovementX = (cos(frameCount * 0.6) * 5 + sin(frameCount * 0.7) * 5) * (this.isHovered ? 2 : 1);
         
         if (this.isHovered) {
-          fontSizeMultiplier = 1.5; // Buchstabe wird noch größer
-          rotationAngle = sin(frameCount * 0.2) * PI / 6; // Schütteln beim Hover
+          fontSizeMultiplier = 1.5; 
+          rotationAngle = sin(frameCount * 0.2) * PI / 6; 
         }
       } else if (currentMood === 'Sad') {
-        // Sad-Verhalten
         fill(textColor);
         waveMovementY = random(-2, 4);
       } else {
-        fill(textColor); // Standardfarbe
+        fill(textColor); 
       }
   
       textSize(this.currentSize * fontSizeMultiplier);
@@ -123,7 +117,7 @@ class Letter {
       push();
       translate(this.x + waveMovementX, this.y + waveMovementY);
       if (rotationAngle !== 0) {
-        rotate(rotationAngle); // Drehung im Happy-Modus
+        rotate(rotationAngle); 
       }
       text(this.char, 0, 0);
       pop();
