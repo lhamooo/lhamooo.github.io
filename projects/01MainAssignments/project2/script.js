@@ -10,14 +10,15 @@ function setup() {
   bar.width = width * 0.6;
   bar.x = (width - bar.width) / 2;
 
-  for (let i = 0; i < 20; i++) { 
-    let value = floor(random(1, 25)); 
+  for (let i = 0; i < 30; i++) { 
+    let isNegative = random() < 0.5;
+    let value = floor(random(1, 25)) * (isNegative ? -1 : 1); 
     circles.push({
       x: random(50, width - 50),
       y: random(50, height - 250), 
-      size: map(value, 1, 25, 60, 20), // Größe abhängig vom Wert
-      vx: random(-5, 5) * (value / 6), 
-      vy: random(-5, 5) * (value / 6),
+      size: map(abs(value), 1, 25, 60, 20), 
+      vx: random(-5, 5) * (abs(value) / 6), 
+      vy: random(-5, 5) * (abs(value) / 6),
       value: value,
       collected: false,
     });
@@ -50,11 +51,11 @@ function draw() {
         }
       }
 
-      fill(255);
+      fill(255); 
       noStroke();
       ellipse(circle.x, circle.y, circle.size);
 
-      fill(0);
+      fill(0); 
       textSize(16);
       textAlign(CENTER, CENTER);
       text(circle.value, circle.x, circle.y);
